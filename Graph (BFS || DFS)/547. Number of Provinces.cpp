@@ -1,3 +1,5 @@
+//Approach 1 (Using BFS)
+
 class Solution {
 public:
 
@@ -46,6 +48,58 @@ int findCircleNum(vector<vector<int>>& isConnected) {
             if(vis[i]==0){
                 count++;
                bfs(i,adj,vis);
+               
+            }
+
+        }
+        return count;
+        
+    }
+};
+
+
+//Approach 2 (Using DFS)
+
+class Solution {
+public:
+
+void dfs(int src,vector<vector<int>>&adj,vector<int>&vis){
+
+   vis[src]=1;
+
+   for(auto x:adj[src]){
+       if(!vis[x]){
+       dfs(x,adj,vis);
+       }
+   }
+
+
+}
+
+int findCircleNum(vector<vector<int>>& isConnected) {
+
+        vector<vector<int>>adj(isConnected.size());
+
+        for(int i=0;i<isConnected.size();i++){
+
+            for(int j=0;j<isConnected[i].size();j++){
+                if(i!=j  && isConnected[i][j]==1){
+                adj[i].push_back(j);
+                adj[j].push_back(i);
+                }
+
+            }
+        }
+        int n=adj.size();
+       
+    
+        vector<int>vis(n,0);
+        int count=0;
+
+        for(int i=0;i<n;i++){
+            if(vis[i]==0){
+                count++;
+               dfs(i,adj,vis);
                
             }
 

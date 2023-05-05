@@ -22,4 +22,5 @@ public:
         }
         return(qr.size()>qd.size())?"Radiant":"Dire";
     }
+    
 };

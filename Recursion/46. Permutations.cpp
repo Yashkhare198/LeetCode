@@ -1,3 +1,5 @@
+
+//Approach 1
 class Solution {
 public:
 void permute(vector<int>&nums,vector<int>&ds,vector<vector<int>>&ans,vector<bool>&freq)
@@ -28,5 +30,36 @@ void permute(vector<int>&nums,vector<int>&ds,vector<vector<int>>&ans,vector<bool
       vector<bool>freq(n,false);
        permute(nums,ds,ans,freq);
        return ans;
+    }
+};
+
+
+//Approach 2
+
+class Solution {
+public:
+void perm( vector<vector<int>>&ans,vector<int>& nums,int i)
+{
+
+    if(i >= nums.size())
+    {
+        ans.push_back(nums);
+        return;
+    }
+
+    for(int x = i; x<nums.size(); x++)
+    {
+        swap(nums[x],nums[i]);
+        perm(ans,nums,i+1);
+        swap(nums[x],nums[i]);
+
+    }
+}
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>ans;
+
+        perm(ans,nums,0);
+        return ans;
+        
     }
 };
